@@ -13,7 +13,7 @@ public class HealthBoost implements IBonus {
     public void apply(Hero hero) {
         int newHealth = hero.gethealthPointsRemaining() + boostAmount;
         hero.sethealthPointsRemaining(newHealth);
-        System.out.println("🩺 Health Boost applied: +" + boostAmount + " HP");
+        System.out.println(" Health Boost applied: +" + boostAmount + " HP");
     }
 
     @Override

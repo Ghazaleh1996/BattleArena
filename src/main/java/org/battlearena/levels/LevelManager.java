@@ -1,6 +1,8 @@
 package org.battlearena.levels;
 
 import org.battlearena.heros.Hero;
+import org.battlearena.heros.HeroUtils;
+import org.battlearena.heros.IHero;
 import org.battlearena.exceptions.CharacterDeadException;
 
 import java.util.List;
@@ -14,6 +16,11 @@ public class LevelManager {
 
     public void runLevels(List<Hero> heroes) {
         System.out.println(" Starting Game with " + levels.size() + " levels\n");
+
+        // Polymorphism by inclusion: client code using interface
+        IHero polyHero = new Hero("PolyHero", 22, 3);
+        polyHero.attack();
+        HeroUtils.printHeroNames(heroes);
 
         for (Level level : levels) {
             try {

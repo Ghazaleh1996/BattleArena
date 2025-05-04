@@ -3,7 +3,7 @@ package org.battlearena.obstacles;
 import org.battlearena.heros.Hero;
 
 public class Trap implements IObstacle {
-    private int damage;
+    private final int damage; // info hiding: private + final
 
     public Trap(int damage) {
         this.damage = damage;

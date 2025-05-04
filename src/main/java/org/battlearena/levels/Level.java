@@ -50,7 +50,7 @@ public class Level {
             }
         }
 
-        // 🆕 اضافه شدن رفتار خاص Ogre و Zombie
+
         for (Enemy enemy : enemies) {
             System.out.println("⚔️ New enemy enters: " + enemy.getClass().getSimpleName());
 

@@ -1,8 +1,8 @@
 package org.battlearena.heros.weapons;
 
 public class Weapon implements IWeapon {
-    private String weaponType;
-    private int attackIncrease;
+    private final String weaponType;
+    private final int attackIncrease;
 
     public Weapon(String weaponType, int attackIncrease) {
         this.weaponType = weaponType;

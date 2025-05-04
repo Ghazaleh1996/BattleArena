@@ -3,7 +3,7 @@ package org.battlearena.obstacles;
 import org.battlearena.heros.Hero;
 
 public class Wall implements IObstacle {
-    private int blockAmount;
+    private final int blockAmount;
 
     public Wall(int blockAmount) {
         this.blockAmount = blockAmount;

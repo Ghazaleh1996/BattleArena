@@ -24,25 +24,38 @@ public class Hero implements IHero {
     public void sethealthPointsRemaining(int hp) { this.healthPointsRemaining = hp; }
     public Weapon getWeapon() { return weapon; }
     public void setWeapon(Weapon weapon) { this.weapon = weapon; }
+
     public void equipWeapon() {
         if (getWeapon() != null && !isWeaponEquipped()) {
             setAttackDamage(getAttackDamage() + weapon.getAttackIncrease());
             setWeaponEquipped(true);
         }
     }
+
     public boolean isWeaponEquipped() { return isWeaponEquipped; }
     public void setWeaponEquipped(boolean value) { this.isWeaponEquipped = value; }
     public void setAttackDamage(int attackDamage) { this.attackDamage = attackDamage; }
+
     public void attack() {
         System.out.println("Hero " + name + " attacks for " + attackDamage + " damage");
     }
+
     public void receiveBonus(IBonus bonus) {
+        // Overloading example
         bonus.apply(this);
     }
-    public String getName() { return name; }
+
     public void receiveBonus(int bonusHealth) {
+        // Overloading example
         this.healthPointsRemaining += bonusHealth;
         System.out.println("🩺 Bonus applied via overloading: +" + bonusHealth + " HP");
     }
 
+    public void heal(int amount) {
+        // Coercion polymorphism example
+        this.healthPointsRemaining += amount;
+        System.out.println("Healed " + amount + " points (coercion example)");
+    }
+
+    public String getName() { return name; }
 }

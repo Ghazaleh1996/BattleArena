@@ -3,6 +3,7 @@ package org.battlearena.heros;
 import org.battlearena.heros.weapons.Weapon;
 
 public interface IHero {
+    String getName();
     int gethealthPoints();
     int gethealthPointsRemaining();
     void sethealthPointsRemaining(int healthPointsRemaining);
