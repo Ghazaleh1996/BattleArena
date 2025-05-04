@@ -8,10 +8,10 @@ import org.battlearena.obstacles.IObstacle;
 import org.battlearena.bonuses.BonusSelector;
 import org.battlearena.exceptions.CharacterDeadException;
 import org.battlearena.enemies.strategy.*;
+import org.battlearena.enemies.individualenemy.IOgre;
+import org.battlearena.enemies.individualenemy.IZombie;
 
 import java.util.List;
-import java.util.Random;
-import java.util.ArrayList;
 
 public class Level {
     private int levelNumber;
@@ -50,8 +50,15 @@ public class Level {
             }
         }
 
+        // 🆕 اضافه شدن رفتار خاص Ogre و Zombie
         for (Enemy enemy : enemies) {
             System.out.println("⚔️ New enemy enters: " + enemy.getClass().getSimpleName());
+
+            if (enemy instanceof IOgre) {
+                ((IOgre) enemy).stareDown();
+            } else if (enemy instanceof IZombie) {
+                ((IZombie) enemy).battleStance();
+            }
         }
 
         while (heroesAlive(heroes) && enemiesAlive(enemies)) {

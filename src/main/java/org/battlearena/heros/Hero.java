@@ -36,7 +36,9 @@ public class Hero implements IHero {
     public void attack() {
         System.out.println("Hero " + name + " attacks for " + attackDamage + " damage");
     }
-    public void receiveBonus(IBonus bonus) { bonus.apply(this); }
+    public void receiveBonus(IBonus bonus) {
+        bonus.apply(this);
+    }
     public String getName() { return name; }
     public void receiveBonus(int bonusHealth) {
         this.healthPointsRemaining += bonusHealth;

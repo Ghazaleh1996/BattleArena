@@ -13,15 +13,6 @@ public abstract class Enemy implements IEnemy {
     private AttackStrategy strategy;
     private EnemyState state;
 
-    public void setState(EnemyState state) {
-        this.state = state;
-    }
-
-    public EnemyState getState() {
-        return state;
-    }
-
-
     public Enemy(int healthPoints, int attackDamage) {
         this.healthPoints = healthPoints;
         this.healthPointsRemaining = healthPoints;
@@ -30,7 +21,13 @@ public abstract class Enemy implements IEnemy {
         this.ID = numberofEnemies;
     }
 
+    public void setState(EnemyState state) {
+        this.state = state;
+    }
 
+    public EnemyState getState() {
+        return state;
+    }
     public void setStrategy(AttackStrategy strategy) {
         this.strategy = strategy;
     }
