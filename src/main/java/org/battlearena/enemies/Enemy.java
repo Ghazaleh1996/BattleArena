@@ -10,7 +10,17 @@ public abstract class Enemy implements IEnemy {
     private int healthPointsRemaining;
     private int attackDamage;
     private static int numberofEnemies;
-    private AttackStrategy strategy; // new field
+    private AttackStrategy strategy;
+    private EnemyState state;
+
+    public void setState(EnemyState state) {
+        this.state = state;
+    }
+
+    public EnemyState getState() {
+        return state;
+    }
+
 
     public Enemy(int healthPoints, int attackDamage) {
         this.healthPoints = healthPoints;

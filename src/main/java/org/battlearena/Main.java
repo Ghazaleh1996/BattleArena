@@ -17,7 +17,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        Difficulty difficulty = Difficulty.HARD;
+        Difficulty difficulty = Difficulty.MEDIUM;
 
         List<Hero> heroes = TitanHeroFactory.createHeroes(difficulty);
         List<Enemy> enemies = EnemyFactory.createEnemies(difficulty);

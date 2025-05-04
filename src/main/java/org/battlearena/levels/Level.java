@@ -2,10 +2,13 @@ package org.battlearena.levels;
 
 import org.battlearena.heros.Hero;
 import org.battlearena.enemies.Enemy;
+import org.battlearena.enemies.EnemyState;
 import org.battlearena.bonuses.IBonus;
 import org.battlearena.obstacles.IObstacle;
 import org.battlearena.bonuses.BonusSelector;
 import org.battlearena.exceptions.CharacterDeadException;
+import org.battlearena.enemies.strategy.*;
+
 import java.util.List;
 import java.util.Random;
 import java.util.ArrayList;
@@ -25,23 +28,22 @@ public class Level {
         this.difficulty = difficulty;
     }
 
-
     public void startLevel(List<Hero> heroes) throws CharacterDeadException {
-        System.out.println("\uD83C\uDF1F Starting Level " + levelNumber + " \uD83C\uDF1F");
+        System.out.println("🌟 Starting Level " + levelNumber + " 🌟");
 
         for (Hero hero : heroes) {
             for (IObstacle obstacle : obstacles) {
                 obstacle.trigger(hero);
             }
 
-            System.out.println("\uD83C\uDF81 Applying predefined bonuses...");
+            System.out.println("🎁 Applying predefined bonuses...");
             for (IBonus bonus : bonuses) {
                 if (hero.gethealthPointsRemaining() > 0) {
                     hero.receiveBonus(bonus);
                 }
             }
 
-            System.out.println("\uD83E\uDEA0 Applying smart bonus based on hero state...");
+            System.out.println("🧠 Applying smart bonus based on hero state...");
             if (hero.gethealthPointsRemaining() > 0) {
                 IBonus selected = BonusSelector.chooseBonus(hero);
                 hero.receiveBonus(selected);
@@ -49,25 +51,23 @@ public class Level {
         }
 
         for (Enemy enemy : enemies) {
-            System.out.println("\u2694\uFE0F New enemy enters: " + enemy.getClass().getSimpleName());
+            System.out.println("⚔️ New enemy enters: " + enemy.getClass().getSimpleName());
         }
 
         while (heroesAlive(heroes) && enemiesAlive(enemies)) {
-            // Enemies attack using strategy
             for (Enemy enemy : enemies) {
                 if (enemy.getHealthPointsRemaining() > 0) {
+                    updateEnemyStateAndStrategy(enemy);
                     enemy.executeStrategy(heroes);
                 }
             }
 
-            // Check hero deaths
             for (Hero hero : heroes) {
                 if (hero.gethealthPointsRemaining() <= 0) {
                     throw new CharacterDeadException(hero.getName() + " has fallen in battle!");
                 }
             }
 
-            // Heroes counterattack
             for (Hero hero : heroes) {
                 if (hero.gethealthPointsRemaining() > 0) {
                     for (Enemy enemy : enemies) {
@@ -82,7 +82,7 @@ public class Level {
             }
         }
 
-        System.out.println(" Applying survival reward bonuses...");
+        System.out.println("🏅 Applying survival reward bonuses...");
         for (Hero hero : heroes) {
             if (hero.gethealthPointsRemaining() > 0) {
                 for (IBonus bonus : bonuses) {
@@ -91,7 +91,22 @@ public class Level {
             }
         }
 
-        System.out.println("Level " + levelNumber + " completed!\n");
+        System.out.println("✅ Level " + levelNumber + " completed!\n");
+    }
+
+    private void updateEnemyStateAndStrategy(Enemy enemy) {
+        double healthRatio = (double) enemy.getHealthPointsRemaining() / enemy.getHealthPoints();
+
+        if (healthRatio < 0.3) {
+            enemy.setState(EnemyState.FLEEING);
+            enemy.setStrategy(new FleeStrategy());
+        } else if (healthRatio < 0.6) {
+            enemy.setState(EnemyState.DEFENSIVE);
+            enemy.setStrategy(new DefensiveStrategy());
+        } else {
+            enemy.setState(EnemyState.AGGRESSIVE);
+            enemy.setStrategy(new AggressiveStrategy());
+        }
     }
 
     private boolean heroesAlive(List<Hero> heroes) {

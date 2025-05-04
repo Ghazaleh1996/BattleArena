@@ -12,7 +12,7 @@ public class DamageBoost implements IBonus {
     @Override
     public void apply(Hero hero) {
         hero.setAttackDamage(hero.getAttackDamage() + boostAmount);
-        System.out.println("🗡️ Damage Boost applied: +" + boostAmount + " Attack");
+        System.out.println(" Damage Boost applied: +" + boostAmount + " Attack");
     }
 
     @Override
