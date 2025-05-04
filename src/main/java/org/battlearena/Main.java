@@ -29,6 +29,9 @@ public class Main {
 
         // Generic utility (parametric polymorphism)
         HeroUtils.printHeroNames(heroes);
+        // Coercion polymorphism: double coerced to int
+        heroes.get(0).heal((int) 4.7);
+
 
         // Level creation
         Level level1 = new Level(1,

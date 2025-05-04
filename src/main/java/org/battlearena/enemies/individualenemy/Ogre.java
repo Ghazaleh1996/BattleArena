@@ -1,12 +1,12 @@
 package org.battlearena.enemies.individualenemy;
 
 import org.battlearena.enemies.Enemy;
-import org.battlearena.enemies.strategy.AreaDamageStrategy;
+import org.battlearena.enemies.strategy.MultiTargetAttackStrategy;
 
 public class Ogre extends Enemy implements IOgre {
     public Ogre(int healthPoints, int attackDamage) {
         super(healthPoints, attackDamage);
-        setStrategy(new AreaDamageStrategy());
+        setStrategy(new MultiTargetAttackStrategy());
     }
 
     @Override

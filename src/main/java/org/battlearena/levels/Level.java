@@ -106,7 +106,7 @@ public class Level {
 
         if (healthRatio < 0.3) {
             enemy.setState(EnemyState.FLEEING);
-            enemy.setStrategy(new FleeStrategy());
+            enemy.setStrategy(new SkipTurnStrategy());
         } else if (healthRatio < 0.6) {
             enemy.setState(EnemyState.DEFENSIVE);
             enemy.setStrategy(new DefensiveStrategy());

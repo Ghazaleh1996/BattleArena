@@ -50,11 +50,10 @@ public class Hero implements IHero {
         this.healthPointsRemaining += bonusHealth;
         System.out.println("🩺 Bonus applied via overloading: +" + bonusHealth + " HP");
     }
-
+    // Coercion polymorphism
     public void heal(int amount) {
-        // Coercion polymorphism example
         this.healthPointsRemaining += amount;
-        System.out.println("Healed " + amount + " points (coercion example)");
+        System.out.println("Healed " + amount + " points ");
     }
 
     public String getName() { return name; }
